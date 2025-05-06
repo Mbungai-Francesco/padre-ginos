@@ -1,19 +1,18 @@
 import { createRoot } from "react-dom/client";
-import Pizza from "./Pizza";
-import Order from "./routes/order.lazy";
-import { StrictMode, useState } from "react";
-import PizzaOfTheDay from "./PizzaOfTheDay";
-import Header from "./Header";
-import { CartContext } from "./contexts";
+import { StrictMode } from "react";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const router = createRouter({routeTree})
+const router = createRouter({ routeTree });
+const queryClient = new QueryClient();
 
 const App = () => {
 	return (
 		<StrictMode>
-			<RouterProvider router={router}/>
+			<QueryClientProvider client={queryClient}>
+				<RouterProvider router={router} />
+			</QueryClientProvider>
 		</StrictMode>
 	);
 };
