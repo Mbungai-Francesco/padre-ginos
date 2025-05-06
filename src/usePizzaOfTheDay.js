@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useDebugValue } from "react";
 
 export const usePizzaOfTheDay = () => {
 	const [pizzaOfTheDay, setPizzaOfTheDay] = useState(null);
+  useDebugValue(pizzaOfTheDay ? `${pizzaOfTheDay.id} : ${pizzaOfTheDay.name}` : "loading...")
 
 	useEffect(() => {
 		async function fetchPizzaOfTheDay() {
@@ -13,7 +14,7 @@ export const usePizzaOfTheDay = () => {
 		// Wait for 10 seconds before fetching the pizza of the day
 		const delay = setTimeout(() => {
 			fetchPizzaOfTheDay();
-		}, 3000);
+		}, 10000);
 
 		// Clean up the timeout if the component unmounts
 		return () => clearTimeout(delay);
