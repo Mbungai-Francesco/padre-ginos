@@ -5,14 +5,24 @@ import { useState } from "react";
 import getPastOrder from "../api/getPastOrder";
 import Modal from "../Modal";
 import { useFormat } from "../useFormat";
+import ErrorBoundary from "../ErrorBoundary";
 
 const intl = useFormat("en-US", "currency", "USD");
 
 export const Route = createLazyFileRoute("/past")({
-	component: PastOrdersRoute,
+	component: ErrorBoundaryWrappedPastOrderRoutes,
 });
 
+function ErrorBoundaryWrappedPastOrderRoutes(props) {
+  return (
+    <ErrorBoundary>
+      <PastOrdersRoute {...props} />
+    </ErrorBoundary>
+  );
+}
+
 function PastOrdersRoute() {
+  throw new Error ("Error in PastOrdersRoute");
 	const [page, setPage] = useState(1);
 	const [focusedOrder, setFocusedOrder] = useState(null);
 	const { isLoading, data } = useQuery({
