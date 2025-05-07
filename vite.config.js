@@ -16,8 +16,11 @@ export default defineConfig({
     }
   },
   plugins: [TanStackRouterVite(), react()],
-  test: {
-    environment: "happy-dom",
-    // setupFiles: "./src/setupTests.js",
-  },
+  // test: {
+  //   environment: "happy-dom",
+  //   coverage: {
+  //     reporter: ["text", "json", "html"]
+  //   }
+  //   // setupFiles: "./src/setupTests.js",
+  // },
 });

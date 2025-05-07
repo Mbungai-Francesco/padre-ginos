@@ -1,3 +1,4 @@
+"use client";
 import { useContext } from "react";
 import { CartContext } from "./contexts";
 import { Link } from "@tanstack/react-router";
