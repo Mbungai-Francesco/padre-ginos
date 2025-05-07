@@ -11,13 +11,14 @@ export const usePizzaOfTheDay = () => {
 			setPizzaOfTheDay(data);
 		}
 
-		// Wait for 10 seconds before fetching the pizza of the day
-		const delay = setTimeout(() => {
-			fetchPizzaOfTheDay();
-		}, 10000);
+		// Wait for 3 seconds before fetching the pizza of the day
+		// const delay = setTimeout(() => {
+		// 	fetchPizzaOfTheDay();
+		// }, 3000);
 
-		// Clean up the timeout if the component unmounts
-		return () => clearTimeout(delay);
+		// // Clean up the timeout if the component unmounts
+		// return () => clearTimeout(delay);
+		fetchPizzaOfTheDay();
 	}, []);
 
 	return pizzaOfTheDay;

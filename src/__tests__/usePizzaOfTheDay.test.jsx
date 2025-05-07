@@ -1,40 +1,32 @@
-import { expect, test, afterEach, vi } from "vitest";
-import { render, cleanup } from "@testing-library/react";
+import { expect, test, vi } from "vitest";
+import { renderHook, waitFor } from "@testing-library/react";
 import createFetchMock from "vitest-fetch-mock";
-import { usePizzaOfTheDay } from "../usePizzaOfTheDay"
+import { usePizzaOfTheDay } from "../usePizzaOfTheDay";
 
-const fetchMocker = createFetchMock(vi)
-fetchMocker.enableMocks()
+const fetchMocker = createFetchMock(vi);
+fetchMocker.enableMocks();
 
-const testPizza ={
+const testPizza = {
   id: "calabrese",
   name: "The Calabrese Pizza",
   category: "Supreme",
-  description: "lol pizza from Calabria",
+  description: "Salami, Pancetta, Tomatoes, Red Onions, Friggitello Peppers, Garlic",
   image: "/public/pizzas/calabrese.webp",
-  sizes: {
-    S : 12.25,
-    M : 16.25,
-    L : 20.25
-  }
-}
+  sizes: { S: 12.25, M: 16.25, L: 20.25 },
+};
 
-function getPizzaOfTheDay() {
-  let pizza;
+test("usePizzaOfTheDay() gives null when first called", async () => {
+	fetch.mockResponseOnce(JSON.stringify(testPizza));
+	const { result } = renderHook(() => usePizzaOfTheDay());
 
-  function TestComponent(){
-    pizza = usePizzaOfTheDay()
-    return null
-  }
+	expect(result.current).toBeNull();
+});
 
-  render(<TestComponent />)
-
-  return pizza
-}
-
-test("usePizzaOfTheDay() gives null when first call", async () => {
-  fetchMocker.mockResponseOnce(JSON.stringify(testPizza))
-  const pizza = getPizzaOfTheDay()
-
-  expect(pizza).toBe(null)
-})
+test("usePizzaOfTheDay() to call the API and give back the pizza of the day", async () => {
+	fetch.mockResponseOnce(JSON.stringify(testPizza));
+	const { result } = renderHook(() => usePizzaOfTheDay());
+	await waitFor(() => {
+		expect(result.current).toEqual(testPizza);
+	});
+	expect(fetchMocker).toBeCalledWith("/api/pizza-of-the-day");
+});
