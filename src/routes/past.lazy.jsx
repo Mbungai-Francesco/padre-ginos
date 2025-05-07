@@ -22,13 +22,13 @@ function ErrorBoundaryWrappedPastOrderRoutes(props) {
 }
 
 function PastOrdersRoute() {
-  throw new Error ("Error in PastOrdersRoute");
+  // throw new Error ("Error in PastOrdersRoute");
 	const [page, setPage] = useState(1);
 	const [focusedOrder, setFocusedOrder] = useState(null);
 	const { isLoading, data } = useQuery({
 		queryKey: ["past-orders", page],
 		queryFn: () => getPastOrders(page),
-		staleTime: 30000,
+		staleTime: 30000, // 30 seconds
 	});
 	const { isLoading: isLoadingPastOrder, data: pastOrderData } = useQuery({
 		queryKey: ["past-order", focusedOrder],

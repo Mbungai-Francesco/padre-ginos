@@ -32,7 +32,7 @@ export default function Order() {
 		})
 		
 		setCart([])
-		setLoading(true)
+		setLoading(false)
 	}
 
 	let price, selectedPizza;
