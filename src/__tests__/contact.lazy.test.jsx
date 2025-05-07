@@ -5,7 +5,6 @@ import createFetchMock from "vitest-fetch-mock";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 import { Route } from "../routes/contact.lazy"
 
-afterEach(cleanup)
 
 const queryClient = new QueryClient()
 
@@ -48,7 +47,7 @@ test("can submit contact form", async () => {
     body: JSON.stringify(testData),
     headers: {
       'Content-Type': 'application/json',
-    },
+    }, 
     method: "POST"
   })
 })
