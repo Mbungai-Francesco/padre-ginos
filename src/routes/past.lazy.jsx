@@ -22,7 +22,7 @@ function ErrorBoundaryWrappedPastOrderRoutes(props) {
 }
 
 function PastOrdersRoute() {
-  // throw new Error ("Error in PastOrdersRoute");
+  
 	const [page, setPage] = useState(1);
 	const [focusedOrder, setFocusedOrder] = useState(null);
 	const { isLoading, data } = useQuery({
@@ -34,11 +34,11 @@ function PastOrdersRoute() {
 		queryKey: ["past-order", focusedOrder],
 		queryFn: () => getPastOrder(focusedOrder),
 		enabled: !!focusedOrder,
-		staleTime: 86400000, // one day in milliseconds
+		staleTime: 86400000,
 	});
 
 	if (isLoading) {
-		//forche@123
+		
 		return (
 			<div className="past-orders">
 				<h2>LOADING...</h2>
