@@ -18,6 +18,6 @@ const App = () => {
 };
 
 const container = document.getElementById("root");
-// modify the createRoot call, delete "ReactDOM"
+
 const root = createRoot(container);
 root.render(<App />);
